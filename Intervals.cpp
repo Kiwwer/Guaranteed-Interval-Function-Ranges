@@ -158,10 +158,6 @@ public:
         return i ? right_ : left_;
     }
 
-    Number& operator[](uint32_t i) {
-        return i ? right_ : left_;
-    }
-
     bool operator==(Interval<Number> other) {
         return (left_ == other.left_ && right_ == other.right_ && NullType() == other.NullType());
     }
