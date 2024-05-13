@@ -1,12 +1,8 @@
-// ConsoleApplication5.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
-//
-
 #include <iostream>
 #include <cstdint>
 #include <vector>
 #include <algorithm>
 #include <cmath>
-#include <unordered_map>
 
 enum Rounding { ROUND_ABS_DOWN, ROUND_ABS_UP, ROUND_FLOOR, ROUND_CEIL };
 
