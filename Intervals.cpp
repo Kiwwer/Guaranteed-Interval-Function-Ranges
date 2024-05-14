@@ -1986,11 +1986,18 @@ FixedWrapper FixedWrapper::MSFasterBinLogUnchecked(FixedWrapper x) {
     if (x.IsPInf() || x.IsNan()) {
         return x;
     }
-    if (x > CONSTANTS.oneandonetenth) {
+    if (x <= CONSTANTS.zero) {
+        return -FixedWrapper::GetInf();
+    }
+    if (x > CONSTANTS.oneandfivetenth) {
         FixedWrapper ln1p5 = GetLN1p5();
         FixedWrapper res = MSFasterBinLogUnchecked(x / CONSTANTS.oneandfivetenth);
         return res + ln1p5;
-    } else {
+    }
+    else {
+        if (x < CONSTANTS.one) {
+            return -MSFasterBinLogUnchecked(CONSTANTS.one / x);
+        }
         return MSLogUnchecked(x);
     }
 }
