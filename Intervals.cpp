@@ -1989,12 +1989,15 @@ FixedWrapper FixedWrapper::MSFasterBinLogUnchecked(FixedWrapper x) {
     if (x <= CONSTANTS.zero) {
         return -FixedWrapper::GetInf();
     }
-    if (x > CONSTANTS.oneandfivetenth) {
-        FixedWrapper ln1p5 = GetLN1p5();
+    FixedWrapper e = GetE();
+    if (x > e) {
+        FixedWrapper res = MSFasterBinLogUnchecked(x / e);
+        return res + CONSTANTS.one;
+    } else if (x > CONSTANTS.oneandfivetenth) {
         FixedWrapper res = MSFasterBinLogUnchecked(x / CONSTANTS.oneandfivetenth);
+        FixedWrapper ln1p5 = GetLN1p5();
         return res + ln1p5;
-    }
-    else {
+    } else {
         if (x < CONSTANTS.one) {
             return -MSFasterBinLogUnchecked(CONSTANTS.one / x);
         }
